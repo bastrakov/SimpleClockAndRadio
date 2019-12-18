@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Clock and radio</string>
+
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="title_activity_setting">SettingActivity</string>
+
+    <string name="hello_msg">Hello message</string>
+    <string name="play_link_1">Play link 1</string>
+    <string name="play_link_2">Play link 2</string>
+    <string name="play_link_3">Play link 3</string>
+    <string name="play_link_4">Play link 4</string>
+
+</resources>
