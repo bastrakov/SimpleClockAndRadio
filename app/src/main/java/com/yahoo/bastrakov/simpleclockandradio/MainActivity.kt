@@ -139,11 +139,11 @@ class MainActivity : AppCompatActivity() {
         btn.startAnimation(animation)
 
         val link = when (index) {
-            1 -> SharedPreferencesHelper.TEST_LINK1
-            2 -> SharedPreferencesHelper.TEST_LINK2
-            3 -> SharedPreferencesHelper.TEST_LINK3
-            4 -> SharedPreferencesHelper.TEST_LINK4
-            else -> SharedPreferencesHelper.TEST_LINK1
+            1 -> sharedPreferencesHelper.getPlayLink(1)
+            2 -> sharedPreferencesHelper.getPlayLink(2)
+            3 -> sharedPreferencesHelper.getPlayLink(3)
+            4 -> sharedPreferencesHelper.getPlayLink(4)
+            else -> sharedPreferencesHelper.getPlayLink(1)
         }
 
         try {

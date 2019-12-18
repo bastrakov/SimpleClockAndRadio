@@ -4,11 +4,11 @@
     <dimen name="main_btn_padding">10dp</dimen>
 
     <dimen name="clock_padding_bottom">70dp</dimen>
-    <dimen name="clock_main_text_size">120dp</dimen>
-    <dimen name="clock_day_text_size">48dp</dimen>
-    <dimen name="clock_week_day_text_size">28dp</dimen>
+    <dimen name="clock_main_text_size">160dp</dimen>
+    <dimen name="clock_day_text_size">52dp</dimen>
+    <dimen name="clock_week_day_text_size">32dp</dimen>
 
-    <dimen name="main_play_btn_height">100dp</dimen>
+    <dimen name="main_play_btn_height">120dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
 </resources>

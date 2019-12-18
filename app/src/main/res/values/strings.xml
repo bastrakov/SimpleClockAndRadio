@@ -12,4 +12,7 @@
     <string name="play_link_3">Play link 3</string>
     <string name="play_link_4">Play link 4</string>
 
+    <string name="data_saved">Data saved to Downloads</string>
+    <string name="data_loaded">Data loaded</string>
+
 </resources>

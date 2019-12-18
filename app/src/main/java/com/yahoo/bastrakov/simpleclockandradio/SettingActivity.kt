@@ -1,23 +1,27 @@
 package com.yahoo.bastrakov.simpleclockandradio
 
-import android.media.AudioManager
-import android.media.MediaPlayer
-import android.net.Uri
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
 import com.google.gson.Gson
 import com.yahoo.bastrakov.simpleclockandradio.data.ImpExpModel
 import com.yahoo.bastrakov.simpleclockandradio.data.SharedPreferencesHelper
 import kotlinx.android.synthetic.main.activity_setting.*
 import java.lang.Exception
+import java.io.File
+import java.io.FileOutputStream
+
 
 class SettingActivity : AppCompatActivity() {
 
     private lateinit var sharedPreferencesHelper: SharedPreferencesHelper
-//    private var mediaPlayer: MediaPlayer = MediaPlayer()
+
+    private val savePath =
+        "${Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)}/simpleclockandradio.json"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,67 +47,35 @@ class SettingActivity : AppCompatActivity() {
         }
 
         setting_play_link_1.setOnFocusChangeListener { view, b ->
-            readLink(b, view, 1)
+            saveLink(b, view, 1)
         }
         setting_play_link_2.setOnFocusChangeListener { view, b ->
-            readLink(b, view, 2)
+            saveLink(b, view, 2)
         }
         setting_play_link_3.setOnFocusChangeListener { view, b ->
-            readLink(b, view, 3)
+            saveLink(b, view, 3)
         }
         setting_play_link_4.setOnFocusChangeListener { view, b ->
-            readLink(b, view, 4)
+            saveLink(b, view, 4)
         }
 
+        populateFieldsWithSavedData()
     }
 
-    private fun readLink(b: Boolean, view: View?, index: Int) {
+    private fun populateFieldsWithSavedData() {
+        setting_play_link_1.setText(sharedPreferencesHelper.getPlayLink(1))
+        setting_play_link_2.setText(sharedPreferencesHelper.getPlayLink(2))
+        setting_play_link_3.setText(sharedPreferencesHelper.getPlayLink(3))
+        setting_play_link_4.setText(sharedPreferencesHelper.getPlayLink(4))
+    }
+
+    private fun saveLink(b: Boolean, view: View?, index: Int) {
         if (!b) {
             val link = (view as EditText).text.toString()
             if (!link.isNullOrEmpty()) {
-                var test = testUri(link)
-                if (test) {
-                    sharedPreferencesHelper.savePlayLink(index, link)
-                    colorUriField(index, true)
-                } else if (!test) {
-                    colorUriField(index, false)
-                }
-            } else {
-                colorUriField(index, true)
+                sharedPreferencesHelper.savePlayLink(index, link)
             }
         }
-    }
-
-    private fun colorUriField (index: Int, result: Boolean) {
-        var view: EditText = setting_play_link_1
-        when (index) {
-            1 -> view = setting_play_link_1
-            2 -> view = setting_play_link_2
-            3 -> view = setting_play_link_3
-            4 -> view = setting_play_link_4
-        }
-        if (!result)
-            view.setBackgroundResource(R.drawable.main_toggle_btn_no)
-        else
-            view.setBackgroundResource(R.drawable.form_field_border)
-    }
-
-    private fun testUri (testUri: String) : Boolean {
-
-        MediaPlayer().apply {
-            setAudioStreamType(AudioManager.STREAM_MUSIC)
-            setDataSource(testUri)
-
-            try {
-                prepareAsync ()
-            } catch (ex: Exception) {
-                return false
-            }
-
-//            start()
-        }
-
-        return true;
     }
 
     private fun settingExport() {
@@ -116,12 +88,35 @@ class SettingActivity : AppCompatActivity() {
 
         val jsonStr = Gson().toJson(model).toString()
 
-        val a = 0;
+        try {
+            val fos = FileOutputStream(File(savePath))
+            fos.write(jsonStr.toByteArray())
+            fos.close()
 
+            Toast.makeText(this, getString(R.string.data_saved), Toast.LENGTH_LONG).show()
+        } catch (ex: Exception) {
+            ex.printStackTrace();
+        }
     }
 
     private fun settingImport() {
+        if (File(savePath).exists()) {
+            val jsonStr = File(savePath).readText()
+            val model = Gson().fromJson(jsonStr, ImpExpModel::class.java)
 
+            if (!model.link1.isNullOrEmpty())
+                sharedPreferencesHelper.savePlayLink(1, model.link1)
+            if (!model.link2.isNullOrEmpty())
+                sharedPreferencesHelper.savePlayLink(2, model.link2)
+            if (!model.link3.isNullOrEmpty())
+                sharedPreferencesHelper.savePlayLink(3, model.link3)
+            if (!model.link4.isNullOrEmpty())
+                sharedPreferencesHelper.savePlayLink(4, model.link4)
+
+            populateFieldsWithSavedData()
+
+            Toast.makeText(this, getString(R.string.data_loaded), Toast.LENGTH_LONG).show()
+        }
     }
 
 }

@@ -4,9 +4,9 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="black_overlay">#66000000</color>
-    <color name="back_black">#000000</color>
+    <color name="colorBlackOverlay">#66000000</color>
+    <color name="colorBackBlack">#000000</color>
 
-    <color name="main_title_msg">#FFEB3B</color>
+    <color name="colorMainTitleMsg">#FFEB3B</color>
 
 </resources>

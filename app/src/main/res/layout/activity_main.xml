@@ -4,14 +4,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/back_black"
+    android:background="@color/colorBackBlack"
     android:keepScreenOn="true"
     >
 
     <ImageView
         android:id="@+id/main_setting"
         style="@style/MainBtn"
-        android:visibility="gone"
         android:src="@drawable/ic_settings_white"/>
 
     <ImageView
@@ -30,14 +29,17 @@
 
         <TextView
             android:id="@+id/main_clock"
+            android:text="12:34"
             style="@style/ClockMain"/>
 
         <TextView
             android:id="@+id/main_day"
+            android:text="15.11.1234"
             style="@style/ClockDay"/>
 
         <TextView
             android:id="@+id/main_week_day"
+            android:text="Monday"
             style="@style/ClockWeekDay"/>
 
     </LinearLayout>

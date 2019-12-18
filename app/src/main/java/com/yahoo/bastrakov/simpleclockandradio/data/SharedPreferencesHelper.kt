@@ -53,17 +53,39 @@ class SharedPreferencesHelper {
         }
     }
 
-    fun getPlayLink(index: Int): String? {
-        var link: String? = "";
-        when(index){
-            1 -> link = loadStringPref(PLAY_LINK1)
-            2 -> link = loadStringPref(PLAY_LINK2)
-            3 -> link = loadStringPref(PLAY_LINK3)
-            4 -> link = loadStringPref(PLAY_LINK4)
+    fun getPlayLink(index: Int): String {
+        return when(index){
+            1 -> {
+                when(val saved = loadStringPref(PLAY_LINK1)) {
+                    null -> TEST_LINK1
+                    else -> saved
+                }
+            }
+            2 -> {
+                when(val saved = loadStringPref(PLAY_LINK2)) {
+                    null -> TEST_LINK2
+                    else -> saved
+                }
+            }
+            3 -> {
+                when(val saved = loadStringPref(PLAY_LINK3)) {
+                    null -> TEST_LINK3
+                    else -> saved
+                }
+            }
+            4 -> {
+                when(val saved = loadStringPref(PLAY_LINK4)) {
+                    null -> TEST_LINK4
+                    else -> saved
+                }
+            }
+            else -> {
+                when(val saved = loadStringPref(PLAY_LINK1)) {
+                    null -> TEST_LINK1
+                    else -> saved
+                }
+            }
         }
-        if (link.isNullOrEmpty())
-            return null;
-        return link;
     }
 
 }
