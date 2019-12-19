@@ -1,5 +1,6 @@
 package com.yahoo.bastrakov.simpleclockandradio
 
+import android.content.Context
 import android.content.Intent
 import android.media.AudioManager
 import android.media.MediaPlayer
@@ -15,6 +16,12 @@ import android.util.Log
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.app.ComponentActivity
+import androidx.core.app.ComponentActivity.ExtraData
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -81,6 +88,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         showTimeTicks()
+
+        main_volume_up.setOnClickListener{
+            val audio = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+            audio.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_RAISE, AudioManager.FLAG_SHOW_UI)
+        }
+
+        main_volume_down.setOnClickListener{
+            val audio = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+            audio.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_LOWER, AudioManager.FLAG_SHOW_UI)
+        }
+
     }
 
     private fun showTimeTicks() {

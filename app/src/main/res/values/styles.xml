@@ -44,6 +44,12 @@
         <item name="android:padding">@dimen/main_btn_padding</item>
     </style>
 
+    <style name="MainVolumeBtn" parent="android:Widget">
+        <item name="android:layout_width">@dimen/main_volume_btn_size</item>
+        <item name="android:layout_height">@dimen/main_volume_btn_size</item>
+        <item name="android:padding">@dimen/main_volume_btn_padding</item>
+    </style>
+
     <style name="MainToggleBtn" parent="android:Widget">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>

@@ -11,4 +11,7 @@
     <dimen name="main_play_btn_height">70dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
+    <dimen name="main_volume_btn_size">100dp</dimen>
+    <dimen name="main_volume_btn_padding">10dp</dimen>
+
 </resources>
