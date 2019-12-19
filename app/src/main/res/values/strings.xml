@@ -14,5 +14,6 @@
 
     <string name="data_saved">Data saved to Downloads</string>
     <string name="data_loaded">Data loaded</string>
+    <string name="radio_error">Radio ERROR</string>
 
 </resources>

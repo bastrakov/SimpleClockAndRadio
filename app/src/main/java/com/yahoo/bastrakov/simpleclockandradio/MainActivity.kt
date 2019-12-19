@@ -14,6 +14,7 @@ import java.util.*
 import android.util.Log
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 
 
 class MainActivity : AppCompatActivity() {
@@ -150,6 +151,7 @@ class MainActivity : AppCompatActivity() {
             mediaPlayer = MediaPlayer().apply {
                 setDataSource(link)
                 setAudioStreamType(AudioManager.STREAM_MUSIC)
+
                 setOnPreparedListener {
                     Log.d(TAG, "doPlay $index START")
                     start()
@@ -159,14 +161,38 @@ class MainActivity : AppCompatActivity() {
                         animation.cancel()
                     }
                 }
+                setOnErrorListener(errorListener)
+
                 Log.d(TAG, "doPlay $index prepareAsync")
                 prepareAsync()
             }
         } catch (e: Exception) {
+            Toast.makeText(this, getString(R.string.radio_error), Toast.LENGTH_LONG).show()
             Log.d(TAG, "doPlay Exception: ${e.message}")
         }
 
         prevIndexSelected = index
+    }
+
+    private val errorListener = MediaPlayer.OnErrorListener { mp, what, extra ->
+
+        Log.d(TAG, "errorListener")
+
+        val msg = when (what) {
+            MediaPlayer.MEDIA_ERROR_IO ->
+                "${getString(R.string.radio_error)} MEDIA_ERROR_IO"
+            MediaPlayer.MEDIA_ERROR_TIMED_OUT ->
+                "${getString(R.string.radio_error)} MEDIA_ERROR_TIMED_OUT"
+            MediaPlayer.MEDIA_ERROR_UNSUPPORTED ->
+                "${getString(R.string.radio_error)} MEDIA_ERROR_UNSUPPORTED"
+            MediaPlayer.MEDIA_ERROR_MALFORMED ->
+                "${getString(R.string.radio_error)} MEDIA_ERROR_MALFORMED"
+            else ->
+                "${getString(R.string.radio_error)}"
+        }
+
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
+        false
     }
 
 }

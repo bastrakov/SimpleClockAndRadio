@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Часы с радио</string>
+
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="title_activity_setting">Настройки</string>
+
+    <string name="hello_msg">Hello message</string>
+    <string name="play_link_1">Полный линк на трансляцию 1</string>
+    <string name="play_link_2">Полный линк на трансляцию 2</string>
+    <string name="play_link_3">Полный линк на трансляцию 3</string>
+    <string name="play_link_4">Полный линк на трансляцию 4</string>
+
+    <string name="data_saved">Данные сохранены в Загрузках</string>
+    <string name="data_loaded">Данные загружены</string>
+    <string name="radio_error">Ошибка подключения</string>
+
+</resources>
