@@ -57,7 +57,7 @@
         <TextView
             android:id="@+id/main_msg_list"
             style="@style/MainMsgList"
-            android:paddingTop="@dimen/main_btn_size"
+            android:paddingTop="@dimen/clock_padding_bottom"
             android:text="@string/hello_msg"/>
 
     </LinearLayout>

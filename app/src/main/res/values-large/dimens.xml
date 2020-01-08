@@ -15,6 +15,6 @@
     <dimen name="volume_down_btn_size">80dp</dimen>
     <dimen name="main_volume_btn_padding">20dp</dimen>
 
-    <dimen name="main_msg_list_text_size">24dp</dimen>
+    <dimen name="main_msg_list_text_size">18dp</dimen>
 
 </resources>
