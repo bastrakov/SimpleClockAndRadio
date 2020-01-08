@@ -6,11 +6,14 @@
 
     <string name="title_activity_setting">SettingActivity</string>
 
-    <string name="hello_msg">Hello message</string>
-    <string name="play_link_1">Play link 1</string>
-    <string name="play_link_2">Play link 2</string>
-    <string name="play_link_3">Play link 3</string>
-    <string name="play_link_4">Play link 4</string>
+    <string name="hello_msg_title">Hello message.</string>
+    <string name="hello_msg">Hello my friend. This is a simple clock and a 3-chanels radio for you.</string>
+    <string name="play_link_1_title">Play link 1</string>
+    <string name="play_link_1_url">http://netzradio-germania.de:1488</string>
+    <string name="play_link_2_title">Play link 2</string>
+    <string name="play_link_2_url">http://maisnova.link:8088/Maisnova/MNCaxias/playlist.m3u8</string>
+    <string name="play_link_3_title">Play link 3</string>
+    <string name="play_link_3_url">http://www.radioson.ru:8009/JazzClassicAndNew.RadioSon.ru.mp3</string>
 
     <string name="data_saved">Data saved to Downloads</string>
     <string name="data_loaded">Data loaded</string>

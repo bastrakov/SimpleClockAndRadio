@@ -62,47 +62,39 @@
 
             <TextView
                 style="@style/FormFieldTitle"
-                android:text="@string/play_link_1"/>
+                android:text="@string/hello_msg_title"/>
+
+            <EditText
+                android:id="@+id/setting_hello_msg"
+                style="@style/FormField"
+                android:hint="@string/hello_msg_title"/>
+
+            <TextView
+                style="@style/FormFieldTitle"
+                android:text="@string/play_link_1_title"/>
 
             <EditText
                 android:id="@+id/setting_play_link_1"
                 style="@style/FormField"
-                android:paddingLeft="15dp"
-                android:layout_marginBottom="15dp"
-                android:hint="@string/play_link_1"/>
+                android:hint="@string/play_link_1_title"/>
 
             <TextView
                 style="@style/FormFieldTitle"
-                android:text="@string/play_link_2"/>
+                android:text="@string/play_link_2_title"/>
 
             <EditText
                 android:id="@+id/setting_play_link_2"
                 style="@style/FormField"
-                android:paddingLeft="15dp"
-                android:layout_marginBottom="15dp"
-                android:hint="@string/play_link_2"/>
+                android:hint="@string/play_link_2_title"/>
 
             <TextView
                 style="@style/FormFieldTitle"
-                android:text="@string/play_link_3"/>
+                android:text="@string/play_link_3_title"/>
 
             <EditText
                 android:id="@+id/setting_play_link_3"
                 style="@style/FormField"
-                android:paddingLeft="15dp"
-                android:layout_marginBottom="15dp"
-                android:hint="@string/play_link_3"/>
-
-            <TextView
-                style="@style/FormFieldTitle"
-                android:text="@string/play_link_4"/>
-
-            <EditText
-                android:id="@+id/setting_play_link_4"
-                style="@style/FormField"
-                android:paddingLeft="15dp"
-                android:layout_marginBottom="15dp"
-                android:hint="@string/play_link_4"/>
+                android:hint="@string/play_link_3_title"/>
 
         </LinearLayout>
 

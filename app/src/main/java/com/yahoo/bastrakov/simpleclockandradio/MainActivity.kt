@@ -16,17 +16,18 @@ import android.util.Log
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.app.ComponentActivity
-import androidx.core.app.ComponentActivity.ExtraData
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
 
-
-
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), CoroutineScope {
 
     private val TAG = "MainActivity"
+
+    private var job: Job = Job()
+    override val coroutineContext: CoroutineContext
+        get() =  Dispatchers.IO + job
+
 
     private lateinit var sharedPreferencesHelper: SharedPreferencesHelper
     private var mediaPlayer: MediaPlayer? = null
@@ -54,6 +55,11 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
 
         Log.i(TAG, "onResume")
+        job = Job()
+        showTimeTicks()
+
+        val helloMsg = sharedPreferencesHelper.getHelloMsg();
+        main_msg_list.text = if (helloMsg.isNullOrEmpty()) {getString(R.string.hello_msg)} else helloMsg
     }
 
     override fun onPause() {
@@ -61,9 +67,14 @@ class MainActivity : AppCompatActivity() {
 
         Log.i(TAG, "onPause")
         doStopPlayAll()
+        job.cancel()
     }
 
     private fun initAllViews() {
+
+        main_clock.text = ""
+        main_day.text = ""
+        main_week_day.text = ""
 
         main_setting.setOnClickListener{
             val intent = Intent(applicationContext, SettingActivity::class.java)
@@ -83,11 +94,6 @@ class MainActivity : AppCompatActivity() {
         main_play3.setOnClickListener{
             doPlay(3)
         }
-        main_play4.setOnClickListener{
-            doPlay(4)
-        }
-
-        showTimeTicks()
 
         main_volume_up.setOnClickListener{
             val audio = getSystemService(Context.AUDIO_SERVICE) as AudioManager
@@ -101,25 +107,26 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun showTimeTicks() {
-        val dt = Calendar.getInstance().time
-        val datMsg = SimpleDateFormat("dd.MM.yyyy").format(dt)
-        main_day.text = datMsg
-        val weekDayMsg = SimpleDateFormat("EEEE").format(dt.time)
-        main_week_day.text = weekDayMsg
-        val clockMsg = SimpleDateFormat("HH:mm").format(dt)
-        main_clock.text = clockMsg
+    private fun showTimeTicks() = this.launch {
 
-        Thread(Runnable {
-            Thread.sleep(5000)
-            this@MainActivity.runOnUiThread { showTimeTicks() }
-        }).start()
+        launch(Dispatchers.Main) {
+
+            while (job.isActive) {
+
+                val dt = Calendar.getInstance().time
+                main_clock.text = SimpleDateFormat("HH:mm").format(dt)
+                main_day.text = SimpleDateFormat("d LLLL").format(dt)
+                main_week_day.text = SimpleDateFormat("EEEE").format(dt)
+
+                delay(5000L)
+            }
+        }
     }
 
     private fun doStopPlayAll() {
         Log.d(TAG, "doStopPlayAll")
 
-        for (btn in arrayOf(main_play1, main_play2, main_play3, main_play4)) {
+        for (btn in arrayOf(main_play1, main_play2, main_play3)) {
             btn.setBackgroundResource(R.drawable.main_toggle_btn_no)
             btn.clearAnimation()
             animation.cancel()
@@ -151,18 +158,22 @@ class MainActivity : AppCompatActivity() {
             1 -> main_play1
             2 -> main_play2
             3 -> main_play3
-            4 -> main_play4
             else -> main_play1
         }
         btn.setBackgroundResource(R.drawable.no_star_gold)
         btn.startAnimation(animation)
 
-        val link = when (index) {
-            1 -> sharedPreferencesHelper.getPlayLink(1)
-            2 -> sharedPreferencesHelper.getPlayLink(2)
-            3 -> sharedPreferencesHelper.getPlayLink(3)
-            4 -> sharedPreferencesHelper.getPlayLink(4)
-            else -> sharedPreferencesHelper.getPlayLink(1)
+
+        val playLink = sharedPreferencesHelper.getPlayLink(index)
+        val link = if (!playLink.isNullOrEmpty()) {
+            playLink
+        } else {
+            when (index) {
+                1 -> getString(R.string.play_link_1_url)
+                2 -> getString(R.string.play_link_2_url)
+                3 -> getString(R.string.play_link_3_url)
+                else -> getString(R.string.play_link_1_url)
+            }
         }
 
         try {

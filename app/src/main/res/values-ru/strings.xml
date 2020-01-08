@@ -6,11 +6,14 @@
 
     <string name="title_activity_setting">Настройки</string>
 
-    <string name="hello_msg">Hello message</string>
-    <string name="play_link_1">Полный линк на трансляцию 1</string>
-    <string name="play_link_2">Полный линк на трансляцию 2</string>
-    <string name="play_link_3">Полный линк на трансляцию 3</string>
-    <string name="play_link_4">Полный линк на трансляцию 4</string>
+    <string name="hello_msg_title">Приветствие.</string>
+    <string name="hello_msg">Привет, друг мой. Эти простые часы с 3-х программным радио для тебя.</string>
+    <string name="play_link_1_title">Полный линк на трансляцию 1</string>
+    <string name="play_link_1_url">http://icecast.vgtrk.cdnvideo.ru/mayakfm_mp3_64kbps</string>
+    <string name="play_link_2_title">Полный линк на трансляцию 2</string>
+    <string name="play_link_2_url">https://bfm.hostingradio.ru:9075/fm</string>
+    <string name="play_link_3_title">Полный линк на трансляцию 3</string>
+    <string name="play_link_3_url">http://ic2.101.ru:8000/c19_2</string>
 
     <string name="data_saved">Данные сохранены в Загрузках</string>
     <string name="data_loaded">Данные загружены</string>

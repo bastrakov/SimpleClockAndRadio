@@ -46,6 +46,15 @@ class SettingActivity : AppCompatActivity() {
             settingImport()
         }
 
+        setting_hello_msg.setOnFocusChangeListener { view, b ->
+            if (!b) {
+                val msg = setting_hello_msg.text.toString()
+                if (!msg.isNullOrEmpty()) {
+                    sharedPreferencesHelper.saveHelloMsg(msg)
+                }
+            }
+        }
+
         setting_play_link_1.setOnFocusChangeListener { view, b ->
             saveLink(b, view, 1)
         }
@@ -55,18 +64,22 @@ class SettingActivity : AppCompatActivity() {
         setting_play_link_3.setOnFocusChangeListener { view, b ->
             saveLink(b, view, 3)
         }
-        setting_play_link_4.setOnFocusChangeListener { view, b ->
-            saveLink(b, view, 4)
-        }
 
         populateFieldsWithSavedData()
     }
 
     private fun populateFieldsWithSavedData() {
-        setting_play_link_1.setText(sharedPreferencesHelper.getPlayLink(1))
-        setting_play_link_2.setText(sharedPreferencesHelper.getPlayLink(2))
-        setting_play_link_3.setText(sharedPreferencesHelper.getPlayLink(3))
-        setting_play_link_4.setText(sharedPreferencesHelper.getPlayLink(4))
+
+        val helloMsg = sharedPreferencesHelper.getHelloMsg();
+        setting_hello_msg.setText(if (helloMsg.isNullOrEmpty()) {getString(R.string.hello_msg)} else helloMsg)
+
+        val playLink1 = sharedPreferencesHelper.getPlayLink(1);
+        val playLink2 = sharedPreferencesHelper.getPlayLink(2);
+        val playLink3 = sharedPreferencesHelper.getPlayLink(3);
+
+        setting_play_link_1.setText(if (playLink1.isNullOrEmpty()) {getString(R.string.play_link_1_url)} else playLink1)
+        setting_play_link_2.setText(if (playLink2.isNullOrEmpty()) {getString(R.string.play_link_2_url)} else playLink2)
+        setting_play_link_3.setText(if (playLink3.isNullOrEmpty()) {getString(R.string.play_link_3_url)} else playLink3)
     }
 
     private fun saveLink(b: Boolean, view: View?, index: Int) {
@@ -79,11 +92,17 @@ class SettingActivity : AppCompatActivity() {
     }
 
     private fun settingExport() {
+
+        val helloMsg = sharedPreferencesHelper.getHelloMsg();
+        val playLink1 = sharedPreferencesHelper.getPlayLink(1);
+        val playLink2 = sharedPreferencesHelper.getPlayLink(2);
+        val playLink3 = sharedPreferencesHelper.getPlayLink(3);
+
         val model = ImpExpModel(
-            sharedPreferencesHelper.getPlayLink(1),
-            sharedPreferencesHelper.getPlayLink(2),
-            sharedPreferencesHelper.getPlayLink(3),
-            sharedPreferencesHelper.getPlayLink(4)
+            if (helloMsg.isNullOrEmpty()) {getString(R.string.hello_msg)} else helloMsg,
+            if (playLink1.isNullOrEmpty()) {getString(R.string.play_link_1_url)} else playLink1,
+            if (playLink2.isNullOrEmpty()) {getString(R.string.play_link_2_url)} else playLink2,
+            if (playLink3.isNullOrEmpty()) {getString(R.string.play_link_3_url)} else playLink3
         )
 
         val jsonStr = Gson().toJson(model).toString()
@@ -104,14 +123,15 @@ class SettingActivity : AppCompatActivity() {
             val jsonStr = File(savePath).readText()
             val model = Gson().fromJson(jsonStr, ImpExpModel::class.java)
 
+            if (!model.helloMsg.isNullOrEmpty())
+                sharedPreferencesHelper.saveHelloMsg(model.helloMsg)
+
             if (!model.link1.isNullOrEmpty())
                 sharedPreferencesHelper.savePlayLink(1, model.link1)
             if (!model.link2.isNullOrEmpty())
                 sharedPreferencesHelper.savePlayLink(2, model.link2)
             if (!model.link3.isNullOrEmpty())
                 sharedPreferencesHelper.savePlayLink(3, model.link3)
-            if (!model.link4.isNullOrEmpty())
-                sharedPreferencesHelper.savePlayLink(4, model.link4)
 
             populateFieldsWithSavedData()
 
