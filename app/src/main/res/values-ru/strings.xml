@@ -19,4 +19,7 @@
     <string name="data_loaded">Данные загружены</string>
     <string name="radio_error">Ошибка подключения</string>
 
+    <string name="prop_export">В файл</string>
+    <string name="prop_import">Из файла</string>
+
 </resources>

@@ -19,4 +19,7 @@
     <string name="data_loaded">Data loaded</string>
     <string name="radio_error">Radio ERROR</string>
 
+    <string name="prop_export">Export</string>
+    <string name="prop_import">Import</string>
+
 </resources>
