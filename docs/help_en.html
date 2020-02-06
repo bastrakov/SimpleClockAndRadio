@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<!-- br><br -->
+
+<h2>just a simple clock with a 3-chanels radio.</h2>
+
+<p>the idea to use an old android phone (or tablet). 
+it should show time and date, and play some music.</p>
+
+<p>there are 3 buttons at the bottom of the screen - 3 internet-radios.
+if you are lucky - it would play from defaults.</p>
+
+<p><img src="e001.png"></p>
+
+<p>centre: time and date. left: date info or hello message.</p>
+<p>left-top corner: settings page. right-top corner: close app.</p>
+<p>cenre-left: volume down, centre-right: volume up.</p>
+
+<h2>settings page.</h2>
+
+<p><img src="e002.png"></p>
+
+<p>(tob buttons in the end of this text).</p>
+
+<p>the first edit-line: the hello message (is visible if no messages for a current day).</p>
+<p>2-4 lines: internet-radio URL-s. it has default links so can work just after start.</p>
+<p>next big button: on/off service main buttons (settings-close-volume).</p>
+<p>2 buttons on the bottom: color themes, light and dark.</p>
+
+<h2>complex settings.</h2>
+
+<p>(you can ignore any step).</p>
+
+<p>write some as hello message, like "love you" or "don't look at the screen - do some!" :-) .</p>
+
+<p>EXPORT and find a file "simpleclockandradio.json" in a phone downloads folder.</p>
+
+<p>use your computer and open simpleclockandradio.json in a text editor (or json editor).</p>
+
+<p>(attention) after changing simpleclockandradio.json 
+has to be loaded the same phone downloads folder as replace. 
+and after that - press the IMPORT button.</p>
+
+<p><img src="e003.png"></p>
+
+<p>link1..link3 - internet-radio URLs. I use VLC.
+
+<p><img src="r006.png"></p>
+
+<p>helloMsg - the same as from setting screen.</p>
+
+<p>events: like a calendar. 
+any record has 3 values: month/day/message.
+ it can be more then one for the same day.</p>
+
+<h2>the most strange.</h2>
+
+<p>it has extro-line. (read jsoup - <a href="https://jsoup.org/cookbook/">cookbook</a>).</p>
+
+<p>examples:</p>
+<p>&nbsp;</p>
+<p>1) today holyday:</p>
+<p>"extLineUrl": "http://www.holidayscalendar.com/"</p>
+<p>"extLinePath": "table.wphc_table tr td"</p>
+<p>&nbsp;</p>
+<p>2) weather RP5:</p>
+<p>"extLineUrl": "http://rp5.ru/%D0%9F%D0%BE%D0%B3%D0%BE%D0%B4%D0%B0_%D0%B2_%D0%99%D0%BE%D1%88%D0%BA%D0%B0%D1%80-%D0%9E%D0%BB%D0%B5"</p>
+<p>"extLinePath": "div#ArchTemp span.t_0"</p>
+<p>&nbsp;</p>
+<p>3) weather MSN:</p>
+<p>"extLineUrl": "http://www.msn.com/en-us/weather/today/Yoshkar-Ola,Volga-Federal-District,Russia/we-city?iso=RU&savedegree=true&weadegreetype=C"</p>
+<p>"extLinePath": "div.current-info span.current"</p>
+<p>&nbsp;</p>
+
+</body>
+</html>
